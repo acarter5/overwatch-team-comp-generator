@@ -1,9 +1,3 @@
-/*
-FYI, the 'onFormSubmit' function at the bottom is what makes the 
-algorithm collect data from a google form and return it to a 
-google sheet. Just look at the other functions to see how the algorithm works.
-*/
-
 var teamCharacters = {
   'DOOMFIST' : 0,
   'GENJI' : 0,
@@ -31,6 +25,7 @@ var teamCharacters = {
   'SYMMETRA' : 0,
   'ZENYATA' : 0,
 }
+
 var DPS = ['DOOMFIST', 'GENJI', 'MCCREEE', 'PHARAH', 'SOLDIER 76', 'TRACER', 'SOMBRA'];
 var DEFENSE = ['BASTION','HANZO', 'JUNKRAT', 'MEI', 'TORBJORN', 'WIDOWMAKER', 'SYMMETRA'];
 var TANKS = ['D.VA', 'ORISA', 'REINHARDT', 'ROADHOG', 'WINSTON', 'ZARYA'];
@@ -304,14 +299,13 @@ function addHealerValues(currentCharacter) {
       break;
   }
 
-  HEALERS.sort(function(charA, charB) {
+  HEALERS = HEALERS.sort(function(charA, charB) {
     return teamCharacters[charB] - teamCharacters[charA];
   });  
 }
 
 function classSort() {
-  var classes = [DPS, DEFENSE, TANKS, augDPS, HEALERS];
-  var resultArray = [];
+  var classes = [DPS, DEFENSE, TANKS, augDPS];
 
   classes.forEach(function(currentClass) {
     currentClass = currentClass.sort(function(charA, charB) {
