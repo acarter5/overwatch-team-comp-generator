@@ -1,3 +1,9 @@
+/*
+FYI, the 'onFormSubmit' function at the bottom is what makes the 
+algorithm collect data from a google form and return it to a 
+google sheet. Just look at the other functions to see how the algorithm works.
+*/
+
 var teamCharacters = {
   'DOOMFIST' : 0,
   'GENJI' : 0,
