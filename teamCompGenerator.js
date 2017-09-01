@@ -1,5 +1,3 @@
-// FYI, onFormSubmit function at the bottom is just to make this program interact with google forms/google sheets
-
 var teamCharacters = {
   'DOOMFIST' : 0,
   'GENJI' : 0,
@@ -45,6 +43,16 @@ function teamCompCreator(enemyTeam, mode, map, teamModel) {
   if (teamModel === '2/2/2') {
     teamCompArray[0] = DPS[0];
     teamCompArray[1] = DPS[1];
+    teamCompArray[2] = TANKS[0];
+    teamCompArray[3] = TANKS[1];
+
+    teamCompArray.forEach(addHealerValues);
+
+    teamCompArray[4] = HEALERS[0];
+    teamCompArray[5] = HEALERS[1];
+  } else if (teamModel === '2/2/2 DEFENSE') {
+    teamCompArray[0] = augDPS[0];
+    teamCompArray[1] = augDPS[1];
     teamCompArray[2] = TANKS[0];
     teamCompArray[3] = TANKS[1];
 
@@ -309,15 +317,24 @@ function classSort() {
 function onFormSubmit(e) {
   var ss = SpreadsheetApp.openById('16jFQUtr6G46Pf4BSYg44v6INknObeGL0xrZ1rF7Odic');
   var resultsTab = ss.getSheetByName("resultsTab");
-  
-  resultsTab.getRange('A1').setValue('hello');
+  var mapChoice;
   
   var timeStamp = e.values[0];
   var enemyTeamChoice = e.values[1];
   var modeChoice = e.values[2];
-  var mapChoice = e.values[3];
   var teamModelChoice = e.values[4];
   
-  var result = teamCompCreator(enemyTeamChoice, modeChoice, mapChoice, teamModelChoice);
+  if (modeChoice == 'ASSAULT') {
+    mapChoice = e.values[3]; 
+  } else if (modeChoice == 'ESCORT') {
+    mapChoice = e.values[5]; 
+  } else if (modeChoice == 'ASSAULT/ESCORT') {
+    mapChoice = e.values[6]; 
+  } else if (modeChoice == 'CONTROL') {
+    mapChoice = e.values[7]; 
+  }
   
+  var result = teamCompCreator(enemyTeamChoice, modeChoice, mapChoice, teamModelChoice); 
+  
+  resultsTab.getRange('A1').setValue(result);
 }
